@@ -252,8 +252,6 @@ export function MintForm() {
             placeholder="0.0"
             value={amount}
             onChange={handleAmountChange}
-            min="0"
-            step="0.000001"
             className="bg-white"
           />
         </div>

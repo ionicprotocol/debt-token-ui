@@ -5,10 +5,9 @@ import {
   useAccount,
   useChainId,
 } from "wagmi";
-import { parseUnits, formatUnits, Address } from "viem";
+import { parseUnits, formatUnits, Address, erc20Abi } from "viem";
 import { CONTRACT_ADDRESSES } from "../contracts/config";
-import IonicDebtTokenABI from "../contracts/IonicDebtToken.json";
-import IonTokenABI from "../contracts/IonToken.json";
+import { ionicDebtTokenAbi } from "../contracts/IonicDebtToken";
 import { useState, useEffect } from "react";
 
 // Hook for getting IonicDebtToken contract address based on current chain
@@ -27,7 +26,7 @@ export function useIonicDebtTokenInfo() {
 
   const { data: name, isLoading: isNameLoading } = useReadContract({
     address,
-    abi: IonicDebtTokenABI.abi,
+    abi: ionicDebtTokenAbi,
     functionName: "name",
     query: {
       enabled: !!address,
@@ -36,7 +35,7 @@ export function useIonicDebtTokenInfo() {
 
   const { data: symbol, isLoading: isSymbolLoading } = useReadContract({
     address,
-    abi: IonicDebtTokenABI.abi,
+    abi: ionicDebtTokenAbi,
     functionName: "symbol",
     query: {
       enabled: !!address,
@@ -45,7 +44,7 @@ export function useIonicDebtTokenInfo() {
 
   const { data: decimals, isLoading: isDecimalsLoading } = useReadContract({
     address,
-    abi: IonicDebtTokenABI.abi,
+    abi: ionicDebtTokenAbi,
     functionName: "decimals",
     query: {
       enabled: !!address,
@@ -72,9 +71,9 @@ export function useIonicDebtTokenBalance() {
     refetch,
   } = useReadContract({
     address: contractAddress,
-    abi: IonicDebtTokenABI.abi,
+    abi: ionicDebtTokenAbi,
     functionName: "balanceOf",
-    args: [userAddress],
+    args: [userAddress!],
     query: {
       enabled: !!contractAddress && !!userAddress,
     },
@@ -97,9 +96,9 @@ export function useIsIonTokenWhitelisted(ionTokenAddress: Address | undefined) {
 
   const { data: isWhitelisted, isLoading } = useReadContract({
     address: contractAddress,
-    abi: IonicDebtTokenABI.abi,
+    abi: ionicDebtTokenAbi,
     functionName: "whitelistedIonTokens",
-    args: [ionTokenAddress],
+    args: [ionTokenAddress!],
     query: {
       enabled: !!contractAddress && !!ionTokenAddress,
     },
@@ -117,9 +116,9 @@ export function useIonTokenScaleFactor(ionTokenAddress: Address | undefined) {
 
   const { data: scaleFactor, isLoading } = useReadContract({
     address: contractAddress,
-    abi: IonicDebtTokenABI.abi,
+    abi: ionicDebtTokenAbi,
     functionName: "ionTokenScaleFactors",
-    args: [ionTokenAddress],
+    args: [ionTokenAddress!],
     query: {
       enabled: !!contractAddress && !!ionTokenAddress,
     },
@@ -160,9 +159,9 @@ export function usePreviewMint(
 
   const { data: tokensToMint, isLoading } = useReadContract({
     address: contractAddress,
-    abi: IonicDebtTokenABI.abi,
+    abi: ionicDebtTokenAbi,
     functionName: "previewMint",
-    args: [ionTokenAddress, parsedAmount],
+    args: [ionTokenAddress!, parsedAmount!],
     query: {
       enabled: !!contractAddress && !!ionTokenAddress && !!parsedAmount,
     },
@@ -202,7 +201,7 @@ export function useMintIonicDebtToken() {
 
       return await writeContractAsync({
         address: contractAddress,
-        abi: IonicDebtTokenABI.abi,
+        abi: ionicDebtTokenAbi,
         functionName: "mint",
         args: [ionTokenAddress, parsedAmount],
       });
@@ -243,7 +242,7 @@ export function useApproveIonToken() {
 
       return await writeContractAsync({
         address: ionTokenAddress,
-        abi: IonTokenABI.abi,
+        abi: erc20Abi,
         functionName: "approve",
         args: [contractAddress, parsedAmount],
       });
@@ -272,9 +271,9 @@ export function useIonTokenBalance(ionTokenAddress: Address | undefined) {
     refetch,
   } = useReadContract({
     address: ionTokenAddress,
-    abi: IonTokenABI.abi,
+    abi: erc20Abi,
     functionName: "balanceOf",
-    args: [userAddress],
+    args: [userAddress!],
     query: {
       enabled: !!ionTokenAddress && !!userAddress,
     },
@@ -303,9 +302,9 @@ export function useIonTokenAllowance(ionTokenAddress: Address | undefined) {
     refetch,
   } = useReadContract({
     address: ionTokenAddress,
-    abi: IonTokenABI.abi,
+    abi: erc20Abi,
     functionName: "allowance",
-    args: [userAddress, contractAddress],
+    args: [userAddress!, contractAddress],
     query: {
       enabled: !!ionTokenAddress && !!userAddress && !!contractAddress,
     },

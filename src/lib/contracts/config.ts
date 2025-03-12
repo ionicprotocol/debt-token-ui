@@ -1,4 +1,4 @@
-import { Address, getAddress, parseUnits } from "viem";
+import { Address, getAddress, parseUnits, zeroAddress } from "viem";
 
 /**
  * Configuration for Mode Mainnet IonicDebtToken deployment
@@ -69,11 +69,18 @@ export const modeMainnetConfig = {
   ],
 };
 
+// Get IonicDebtToken address from environment variable or use default
+const getIonicDebtTokenAddress = (): Address => {
+  return (
+    (process.env.NEXT_PUBLIC_IONIC_DEBT_TOKEN_ADDRESS as Address) || zeroAddress
+  );
+};
+
 // Contract addresses - replace with actual deployed addresses
 export const CONTRACT_ADDRESSES: Record<number, Record<string, Address>> = {
   // Mode Mainnet
   34443: {
-    IonicDebtToken: "0x0000000000000000000000000000000000000000" as Address,
+    IonicDebtToken: getIonicDebtTokenAddress(),
   },
 };
 

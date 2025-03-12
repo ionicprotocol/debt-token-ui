@@ -1,6 +1,4 @@
 import { ReactNode } from "react";
-import { ConnectWallet } from "./ConnectWallet";
-import { NetworkInfo } from "./NetworkInfo";
 import { ToastContextProvider } from "./ui/ToastContext";
 
 interface LayoutProps {
@@ -20,8 +18,8 @@ export function Layout({ children }: LayoutProps) {
               <h1 className="text-xl font-bold">Ionic Debt UI</h1>
             </div>
             <div className="flex items-center space-x-4">
-              <NetworkInfo />
-              <ConnectWallet />
+              {/* @ts-ignore */}
+              <appkit-button />
             </div>
           </div>
         </header>

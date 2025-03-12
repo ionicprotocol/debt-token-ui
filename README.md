@@ -44,12 +44,18 @@ pnpm install
 
 3. Configure environment variables:
 
-Create a `.env.local` file in the root directory with the following variables:
+Create a `.env` file in the root directory based on the provided `.env.example`:
 
 ```
+# Required
 NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=your_walletconnect_project_id
-NEXT_PUBLIC_MODE_RPC_URL=your_mode_rpc_url (optional, defaults to https://mainnet.mode.network)
+
+# Optional (defaults provided)
+NEXT_PUBLIC_MODE_RPC_URL=your_mode_rpc_url
+NEXT_PUBLIC_IONIC_DEBT_TOKEN_ADDRESS=your_contract_address
 ```
+
+You can also use `.env.local` for local development if you prefer.
 
 4. Update contract addresses:
 
@@ -116,3 +122,21 @@ This application is designed to work exclusively with Mode Mainnet (Chain ID: 34
 ## License
 
 MIT
+
+## Future Enhancements
+
+### Reown AppKit Integration
+
+The application is planned to be integrated with [Reown AppKit](https://docs.reown.com/appkit/overview) for an improved wallet connection experience. This will provide:
+
+- A more user-friendly wallet connection interface
+- Support for more wallet providers
+- Better mobile wallet support
+- Social login options
+
+To enable this integration, you'll need to:
+
+1. Get a project ID from [Reown Cloud](https://cloud.reown.com)
+2. Add it to your `.env` file as `NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID`
+
+The codebase already includes commented references to AppKit integration that will be implemented in a future update.
