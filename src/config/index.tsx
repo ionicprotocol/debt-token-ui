@@ -1,4 +1,4 @@
-import { cookieStorage, createStorage } from "@wagmi/core";
+import { cookieStorage, createStorage, http } from "@wagmi/core";
 import { WagmiAdapter } from "@reown/appkit-adapter-wagmi";
 import { AppKitNetwork, defineChain } from "@reown/appkit/networks";
 
@@ -41,6 +41,11 @@ export const wagmiAdapter = new WagmiAdapter({
   ssr: true,
   projectId,
   networks,
+  transports: {
+    [customNetwork.id]: http(
+      process.env.NEXT_PUBLIC_MODE_RPC_URL || "https://mainnet.mode.network"
+    ),
+  },
 });
 
 export const config = wagmiAdapter.wagmiConfig;
