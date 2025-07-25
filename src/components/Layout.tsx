@@ -1,5 +1,5 @@
-import { ReactNode } from "react";
-import { ToastContextProvider } from "./ui/ToastContext";
+import { ReactNode } from 'react';
+import { ToastContextProvider } from './ui/ToastContext';
 
 interface LayoutProps {
   children: ReactNode;
@@ -8,12 +8,12 @@ interface LayoutProps {
 export function Layout({ children }: LayoutProps) {
   return (
     <ToastContextProvider>
-      <div className="min-h-screen bg-gray-50">
-        <header className="bg-white border-b border-gray-200">
-          <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
-                <span className="text-white font-bold">I</span>
+      <div className="min-h-screen bg-background">
+        <header className="bg-card border-b border-border">
+          <div className="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div className="flex items-center space-x-3">
+              <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center">
+                <span className="text-primary-foreground font-bold text-lg">I</span>
               </div>
               <h1 className="text-xl font-bold">Ionic Debt UI</h1>
             </div>
@@ -23,12 +23,11 @@ export function Layout({ children }: LayoutProps) {
             </div>
           </div>
         </header>
-        <main className="container mx-auto px-4 py-8">{children}</main>
-        <footer className="bg-white border-t border-gray-200 mt-auto">
-          <div className="container mx-auto px-4 py-6">
-            <div className="text-center text-gray-500 text-sm">
-              &copy; {new Date().getFullYear()} Ionic Protocol. All rights
-              reserved.
+        <main className="container mx-auto px-6 py-8">{children}</main>
+        <footer className="bg-card border-t border-border mt-auto">
+          <div className="container mx-auto px-6 py-6">
+            <div className="text-center text-muted-foreground text-sm">
+              &copy; {new Date().getFullYear()} Ionic Protocol. All rights reserved.
             </div>
           </div>
         </footer>
