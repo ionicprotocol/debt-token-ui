@@ -18,7 +18,6 @@ export function Layout({ children }: LayoutProps) {
               <h1 className="text-xl font-bold">Ionic Debt UI</h1>
             </div>
             <div className="flex items-center space-x-4">
-              {/* @ts-ignore */}
               <appkit-button />
             </div>
           </div>
